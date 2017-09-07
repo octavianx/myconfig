@@ -8,7 +8,14 @@ set number
 set ruler
 set showcmd         " Show (partial) command in status line.
 
+"在超过79个字符的行，显示一个洋红色的背景色色块
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn','\%80v', 100)
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 syntax on
 " 设置tab输入时替换成4个空格进入，同时删除TAB的步进也是4个 set TAB into 4x spaces 
@@ -39,7 +46,6 @@ set formatoptions=c,q,r,t
                     " t         Auto-wrap text using textwidth (does not apply
                     "           to comments)
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "设置高亮检索，检索时候自动增长匹配
 set hlsearch
