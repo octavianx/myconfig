@@ -87,12 +87,7 @@ autocmd BufReadPost *  if line("'\"") > 1 && line("'\"") <= line("$")
                    \|  endif
 
 
-
-
-
 set clipboard=unnamed
-
-
 
 " some tricks from OSCON , by damian Conway
 "
@@ -114,6 +109,3 @@ call matchadd('ColorColumn','\%80v', 100)
 set lcs=tab:⇒·,trail:␣,nbsp:~"
 highlight InvisibleSpaces ctermfg=Black ctermbg=Black
 call matchadd('InvisibleSpaces', '\s\+\%#', 100)
-
-
-
