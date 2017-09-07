@@ -1,6 +1,14 @@
 " This is under managment of  github repo now
 " https://github.com/octavianx/myconfig
 
+"" 全局的UTF-8 encoding
+
+setglobal termencoding=utf-8 fileencodings=
+scriptencoding utf-8
+
+highlight Comment term=bold ctermfg=white
+
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " 显示行号
@@ -12,10 +20,6 @@ set showcmd         " Show (partial) command in status line.
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn','\%80v', 100)
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 syntax on
 " 设置tab输入时替换成4个空格进入，同时删除TAB的步进也是4个 set TAB into 4x spaces 
@@ -23,6 +27,8 @@ set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 
 " 设置退格键的作用
 set backspace=indent,eol,start
+
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -56,41 +62,58 @@ set ignorecase
 " 如果有一个大写字母，则切换到大小写敏感查找
 set smartcase 
 
-autocmd cursorhold * set nohlsearch
-noremap n :set hlsearch<cr>n
-noremap N :set hlsearch<cr>N
-noremap / :set hlsearch<cr>/
-noremap ? :set hlsearch<cr>?
-noremap * *:set hlsearch<cr>
+highlight clear Search
+highlight       Search    ctermfg=White
 
-nnoremap <space> :call DisableHighlight()<cr>
-function! DisableHighlight()
-    set nohlsearch
-endfunc
+"====[ Set background hint (if possible) ]=============
+
+"if $VIMBACKGROUND != ""
+"    exec 'set background=' . $VIMBACKGROUND
+"else
+"    set background=dark
+"endif
+
+set background=dark
 
 
 
-set guicursor=i:block-iCursor-blinkon0,v:block-vCursor
 
 
 set backspace=indent,eol,start
 
-"automatic recovery to last cursor position
-
-"au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif   
-
-
-"set nocompatible              " required
-"filetype off                  " required
-
-"set rtp+=~/.vim/bundle/Vundle.vim
-"call vundle#begin()
-"Plugin 'gmarik/Vundle.vim'
-"call vundle#end()            " required
-"filetype plugin indent on    " required
+"automatic recovery to last cursor position  自动进入到上一次打开本文件的行
+autocmd BufReadPost *  if line("'\"") > 1 && line("'\"") <= line("$")
+                   \|     exe "normal! g`\""
+                   \|  endif
 
 
-"nnoremap <C-J> <C-W><C-J>
 
-"Mac OS specified clipboard usage
+
+
 set clipboard=unnamed
+
+
+
+" some tricks from OSCON , by damian Conway
+"
+" 1- highligh the 80th column
+"
+"在超过79个字符的行，显示一个洋红色的背景色色块
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn','\%80v', 100)
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" "
+" 2- hlsearch, while multiple match spots, it is hard to find where the cursor
+
+    exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
+    set list
+
+
+" Make naughty characters visible...
+" (uBB is right double angle, uB7 is middle dot)
+set lcs=tab:⇒·,trail:␣,nbsp:~"
+highlight InvisibleSpaces ctermfg=Black ctermbg=Black
+call matchadd('InvisibleSpaces', '\s\+\%#', 100)
+
+
+
