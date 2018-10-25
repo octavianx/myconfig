@@ -1,3 +1,14 @@
+
+set nocompatible              " required
+filetype off                  " required
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+Plugin 'Yggdroot/indentLine'
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+
 " This is under managment of  github repo now
 " https://github.com/octavianx/myconfig
 
@@ -9,6 +20,7 @@ scriptencoding utf-8
 highlight Comment term=bold ctermfg=white
 
 
+set clipboard=unnamed
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " 显示行号
@@ -23,7 +35,7 @@ call matchadd('ColorColumn','\%80v', 100)
 
 syntax on
 " 设置tab输入时替换成4个空格进入，同时删除TAB的步进也是4个 set TAB into 4x spaces 
-set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+" set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 
 " 设置退格键的作用
 set backspace=indent,eol,start
@@ -87,7 +99,10 @@ autocmd BufReadPost *  if line("'\"") > 1 && line("'\"") <= line("$")
                    \|  endif
 
 
-set clipboard=unnamed
+set pastetoggle=<F9>
+
+
+
 
 " some tricks from OSCON , by damian Conway
 "
@@ -109,3 +124,4 @@ call matchadd('ColorColumn','\%80v', 100)
 set lcs=tab:⇒·,trail:␣,nbsp:~"
 highlight InvisibleSpaces ctermfg=Black ctermbg=Black
 call matchadd('InvisibleSpaces', '\s\+\%#', 100)
+
